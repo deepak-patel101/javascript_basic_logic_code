@@ -183,5 +183,232 @@ factorial(10);
 
 // --------------------------------------------------------------------------------------
 console.log("");
-console.log("-------------// # //-------------");
-// ------ FACTORIAL-------
+console.log("-------------// FACTORS //-------------");
+// ------------------ FACTORIAL---------------
+
+const factorsArray = [];
+const factors = (number) => {
+  for (let i = 1; i <= number; i++) {
+    if (number % i === 0) {
+      factorsArray.push(i);
+    }
+  }
+  const result = `here are the factors of ${number} = [${factorsArray}]`;
+  return console.log(result);
+};
+factors(7);
+
+// --------------------------------------------------------------------------------------
+console.log("");
+console.log("-------------// reverse palindrome using for of //-------------");
+// ------------------ reverse and palindrome using for of------------
+
+const reverseFunctionAA = (str) => {
+  let reversStr = "";
+  for (let char of str) {
+    reversStr = char + reversStr;
+  }
+
+  if (reversStr == str) {
+    console.log(`${str} "its a palindrome"`);
+  } else {
+    console.log(`${str} "its not a palindrome"`);
+  }
+};
+reverseFunctionAA("12321");
+
+// --------------------------------------------------------------------------------------
+console.log("");
+console.log("-------------// reverse number  //-------------");
+// ------------------- reverse number-------------------------
+
+const revFunction = (num) => {
+  console.log(typeof num, num);
+  result = num.toString().split("").reverse().join("");
+
+  result2 = parseInt(num.toString().split("").reverse().join("")); //to convert it again a nomber
+  // ab yadi no -ve ho
+  if (num < 0) {
+    return console.log(typeof result2, result2 * -1);
+  }
+  return console.log(typeof result2, result2);
+};
+revFunction(123);
+revFunction(-123);
+
+// --------------------------------------------------------------------------------------
+console.log("");
+console.log("-------------// max char in string //-------------");
+console.log("--// any thing related counting char in a string //--");
+
+// -------------------max char in string-------------------------
+
+// to apn ek ojct banating ek ek char ka aur note karinge ki wo char kitni bar repete hora h
+
+const stringForMaxChar = "Hello my name is deepak!";
+const charsCount = {};
+for (let char of stringForMaxChar) {
+  if (!charsCount[char]) {
+    charsCount[char] = 1; // dyanamic asainment yadi wo char object me ni ho to add akro aur value 1 do
+  } else {
+    charsCount[char]++; // yadi char he to uski value +1 kar do
+  }
+}
+console.log(stringForMaxChar, charsCount);
+// to run a loop over an array also on string we use "for of"
+// but to run a loop over an object we use "for in"
+
+let mostRpChar = "";
+let mostRepCharCount = 0;
+for (let char in charsCount) {
+  if (charsCount[char] > mostRepCharCount) {
+    mostRpChar = char;
+    mostRepCharCount = charsCount[char];
+  }
+}
+// const result = `most rep char is "${mostRpChar}" comes for ${mostRepCharCount} times`;
+
+// console.log(result);
+console.log(
+  `most rep char is "${mostRpChar}" comes for ${mostRepCharCount} times`
+);
+
+// --------------------------------------------------------------------------------------
+console.log("");
+console.log("-------------//FizzBuzz //-------------");
+
+// -------------------fizzBuzz-------------------------
+
+const fizzBuzz = (number) => {
+  if (number > 0) {
+    for (let i = 1; i <= number; i++) {
+      if (number % 3 === 0 && number % 5 === 0) {
+        console.log("fizzBuzz");
+      } else if (number % 3 === 0) {
+        console.log("fizz");
+      } else if (number % 5 === 0) {
+        console.log("Buzz");
+      } else {
+        console.log(":p");
+      }
+    }
+  } else {
+    console.log("pleas enter a positive no");
+  }
+};
+fizzBuzz(15);
+fizzBuzz(9);
+fizzBuzz(50);
+fizzBuzz(44);
+
+// --------------------------------------------------------------------------------------
+console.log("");
+console.log("-------------// array chunking //-------------");
+
+// -------------------array chunking-------------------------
+// ex chunk([2,3,4,5,6,7,8],2)
+// out [[2,3][4,5][6,7][8]]
+
+const chunk = (array, size) => {
+  const chunked = [];
+  for (let ele of array) {
+    const last = chunked[chunked.length - 1]; //last me apne array save kar diya last wala jo chunked me hoga starting me kuch ni h to last undifinde ho jaega
+    // console.log(last);
+    if (!last || last.length === size) {
+      // yadi last[ [iski baat ho rahi h]   ] hogahi ni hi suruaat me to aage ka task auryadi last[array] ka size givien size kw barabar ho jae to  naya array bana ke data push kar do
+      chunked.push([ele]);
+    } else {
+      last.push(ele);
+    }
+  }
+  console.log(array);
+  console.log(chunked);
+};
+chunk([2, 3, 4, 5, 6, 7, 8], 2);
+chunk([2, 3, 4, 5, 4, 5, 6, 7, 8], 3);
+
+// --------------------------------------------------------------------------------------
+console.log("");
+console.log("-------------// array chunking using slice//-------------");
+
+// -------------------array chunking-------------------------
+// ex chunk([2,3,4,5,6,7,8],2)
+// out [[2,3][4,5][6,7][8]]
+
+const chunkSlice = (array, size) => {
+  const chunked = [];
+  let index = 0;
+  while (index < array.length) {
+    chunked.push(array.slice(index, index + size));
+    index += size;
+  }
+  return console.log(array, chunked);
+};
+chunkSlice([2, 3, 4, 5, 6, 7, 8], 2);
+
+// --------------------------------------------------------------------------------------
+console.log("");
+console.log("-------------// anagrams (words wahi ho)//-------------");
+
+// -------------------anagrams-------------------------
+
+const anagrams = (strA, strB) => {
+  console.log(`"${strA}" & "${strB}"`);
+  strAtoArray = strA.split("").sort();
+  strBtoArray = strB.split("").sort();
+
+  let result = false;
+  if (strAtoArray.length === strBtoArray.length) {
+    for (let i = 0; i < strAtoArray.length; i++) {
+      if (strBtoArray[i] === strAtoArray[i]) {
+        result = true;
+        continue;
+      } else {
+        result = false;
+        break;
+      }
+    }
+
+    console.log(result ? "its a anagram" : "not a anagram");
+  } else {
+    console.log("not a anagram");
+  }
+};
+
+anagrams("deepak patel", "pakdee patel");
+anagrams("deepak 212", "pakdee 222");
+
+// --------------------------------------------------------------------------------------
+console.log("");
+console.log("-------------// capitalization //-------------");
+
+// -------------------capitalization -------------------------
+
+const capitalization = (str) => {
+  console.log(str);
+  const capitalized = [];
+  for (let word of str.split(" ")) {
+    capitalized.push(word[0].toUpperCase() + word.slice(1));
+  }
+  console.log(capitalized.join(" "));
+};
+capitalization("hello there its me deepak patel");
+
+// --------------------------------------------------------------------------------------
+console.log("");
+console.log("-------------// capitalization using for loop//-------------");
+
+// -------------------capitalization using for loop-------------------------
+
+const capitalizationTWO = (str) => {
+  let capitalized = str[0].toUpperCase();
+  for (let i = 1; i < str.length; i++) {
+    if (str[i - 1] === " ") {
+      capitalized += str[i].toUpperCase();
+    } else {
+      capitalized += str[i];
+    }
+  }
+  console.log(capitalized);
+};
+capitalizationTWO("to kese hai aap log");
